@@ -10,7 +10,7 @@ GROUP BY c.Country
 ORDER BY NoOfMusicListener DESC
 
 
-/* Query 1 - Where are my top customers located at? */
+/* Query 1 - Top 5 Customers */
 SELECT c.ContactName, c.Country, SUM(od.Quantity) As QuantityPurchased
 FROM Customers c
 JOIN Orders o ON c.CustomerId = o.CustomerId
@@ -19,7 +19,14 @@ GROUP BY c.CustomerId
 ORDER BY  QuantityPurchased DESC
 LIMIT 5
 
-
+/* Query 2 - Top 5 Countries with the most customers */
+SELECT c.Country, SUM(od.Quantity) As QuantityPurchased
+FROM Customers c
+JOIN Orders o ON c.CustomerId = o.CustomerId
+JOIN OrderDetails od ON o.OrderId = od.OrderId
+GROUP BY c.Country
+ORDER BY  QuantityPurchased DESC
+LIMIT 5
 
 
 
