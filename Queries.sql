@@ -1,9 +1,9 @@
 /* Query 1 - Top 5 customers with the most purchases */
-SELECT c.CompanyName, c.Country, SUM(od.Quantity) As QuantityPurchased
-FROM Customers c
-JOIN Orders o ON c.CustomerId = o.CustomerId
-JOIN OrderDetails od ON o.OrderId = od.OrderId
-GROUP BY c.CustomerId
+SELECT *
+FROM (SELECT c.CompanyName, c.Country, SUM(od.Quantity) As QuantityPurchased FROM Customers c
+	JOIN Orders o ON c.CustomerId = o.CustomerId
+	JOIN OrderDetails od ON o.OrderId = od.OrderId
+	GROUP BY c.CustomerId) t1
 ORDER BY  QuantityPurchased DESC
 LIMIT 5
 
